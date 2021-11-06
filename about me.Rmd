@@ -8,14 +8,37 @@ output:
 
 Here is some information about my past experiences 
 
-## School 
-* Columbia University Mailman School of Public Health, 2020 - 2022 (expected)         
-Masters of Public Health 
-Environmental Health Sciences, Molecular Epidemiology certificate 
+## Schools
+<dl>
+  <dt>Columbia Mailman School of Public Health, New York, NY</dt>
+  <dd>- Master of Public Health in Environmental Health Sciences</dd>
+  <dd>- Certificate in molecular epidemiology</dd>
+  <dd>- Fall 2020 - Spring 2022 </dd>
+  <dt>Fordahm University at Rose Hill</dt>
+  <dd>- Bachelor's of Science </dd>
+  <dd>- Biology Major, Chemistry minor </dd>
+  <dd>- Fall 2016 - Spring 2020 </dd>
+</dl>
 
-* Fordham University, 2016 - 2020 
-Bachelors of Science
-Biology major, Chemistry minor 
+## Research 
+<dl>
+  <dt>Use of Personal Care Products in Children with Respiratory Illnesses </dt>
+  <dd>- Westchester Medical Center</dd>
+  <dd>- Division of Pediatric Pulmonology, Immunology, and Sleep Medicine</dd>
+  <dd>- Summer 2017 </dd>
+  <dt>Maternal Prenatal Exposure to Phthalates and Parabens from Personal Care Products</dt>
+  <dd>- Columbia Center for Children's Environmental Health </dd>
+  <dd>- Faculty Mentor: Dr. Julie Herbstman </dd>
+  <dd>- Summer 2018</dd>
+  <dt>The Effect of Prenatal Phthalate Exposure and DNA Methylation on Neurodevelopment</dt>
+  <dd>- Columbia Center for Children's Environmental Health </dd>
+  <dd>- Faculty Mentor: Dr. Julie Herbstman </dd>
+  <dd>- Summer 2019</dd>
+  <dt>Metal Mixtures and DNA Methylation Measures of Biological Aging in American Indians</dt>
+  <dd>- Columbia Mailman School of Public Health, Departmet of Environmental Health Sciences </dd>
+  <dd>- Faculty Mentor: Dr. Ana Navas-Acien & Dr. Allison Kupsco </dd>
+  <dd>- Summer 2021 - Present</dd>
+</dl>
 
 back [home](index.html)
 

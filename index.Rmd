@@ -8,5 +8,7 @@ output:
 
 # Welcome to Kaila's website 
 
+Hi everyone, My name is Kaila Boyer and I am a 2nd year MPH student in Environmental Health Sciences getting a certificate in molecular epidemiology. 
+
 
 Here's more [about me](about-me.html).
