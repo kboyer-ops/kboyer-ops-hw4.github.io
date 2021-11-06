@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Kaila Boyer" />
+
+
+<title>plots</title>
+
+<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cerulean.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+<script src="site_libs/plotly-binding-4.10.0/plotly.js"></script>
+<script src="site_libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="site_libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
+<script src="site_libs/crosstalk-1.1.1/js/crosstalk.min.js"></script>
+<link href="site_libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="site_libs/plotly-main-2.5.1/plotly-latest.min.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Home</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="about-me.html">About</a>
+</li>
+<li>
+  <a href="plots.html">Plots</a>
+</li>
+<li>
+  <a href="mailto:&lt;kb3066@cumc.columbia.edu&gt;">
+    <span class="fa fa-envelope fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://github.com/kboyer-ops">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="http://www.linkedin.com/in/kaila-boyer">
+    <span class="fa fa-linkedin"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">plots</h1>
+<h4 class="author">Kaila Boyer</h4>
+<h4 class="date">11/5/2021</h4>
+
+</div>
+
+
+<pre class="r"><code>colnames(ny_noaa)
+
+Hmisc::describe(ny_noaa$id)
+(ny_noaa$id)
+
+ny_noaa %&gt;% select(id) %&gt;% distinct() %&gt;% count()
+
+#select Buffalo, Syracuse, Rochester, Watertown, Lake Placid, Albany, Central Park, Montauck 
+range(ny_noaa$date)
+
+# GHCND:USW00014733 buffalo 
+# GHCND:US1NYCM0006 , GHCND:USW00014748, GHCND:USC00302610 elmira 
+# GHCND:USC00306659 , GHCND:USW00094733 plattsburgh
+# GHCND:USW00014735 albany 
+# GHCND:USW00094794 utica/onieda 
+# GHCND:USW00004725 binghamton
+# GHCND:USW00094745 white plains
+# GHCND:USW00014732 laguardia (queens)
+# GHCND:USC00300889 bridgehampton
+# GHCND:USW00094725 massena 
+# GHCND:USC00303284 glen falls farm 
+# GHCND:USC00304555 lake placid 
+# GHCND:USW00094790 watertown
+# GHCND:USC00309292 west point
+# GHCND:USW00094728 central park 
+
+
+merged_ny %&gt;% 
+  filter(id == &quot;USW00014733&quot; | id == &quot;US1NYCM0006&quot; | id == &quot;USW00014735&quot; | id == &quot;USC00306659&quot; | id == &quot;USW00004725&quot; | id == &quot;USW00094745&quot; | id == &quot;USW00014732&quot; | id ==&quot;USC00300889&quot; | id == &quot;USW00094725&quot; | id == &quot;USC00303284 &quot; | id == &quot;USW00094790&quot; | id ==&quot;USC00304555&quot; | id == &quot;USW00094728&quot;) %&gt;% 
+  ggplot(aes(x = year, y = avg_snwd, color = name)) + 
+  geom_line(aes(group= name))
+ 
+
+merged_ny %&gt;% mutate(name = as.factor(name), 
+                     name = fct_reorder(name, avg_prcp)) %&gt;%
+  filter(id == &quot;USW00014733&quot; | id == &quot;US1NYCM0006&quot; | id == &quot;USW00014735&quot; | id == &quot;USC00306659&quot; | id == &quot;USW00004725&quot; | id == &quot;USW00094745&quot; | id == &quot;USW00014732&quot; | id ==&quot;USC00300889&quot; | id == &quot;USW00094725&quot; | id == &quot;USC00303284 &quot; | id == &quot;USW00094790&quot; | id ==&quot;USC00304555&quot; | id == &quot;USW00094728&quot;) %&gt;%  
+  ggplot(aes(x = name, y = avg_prcp)) + 
+  geom_col(aes(fill = elevation))
+
+
+
+
+
+plot_ly(
+    x = ~lat, y = ~long, type = &quot;scatter&quot;, mode = &quot;markers&quot;,
+    color = ~price, text = ~text_label, alpha = 0.5)
+
+merged_ny  %&gt;% filter(year ==  &quot;2000&quot;) %&gt;% 
+  plot_ly( x = ~latitude, y = ~longitude, type = &quot;scatter&quot;, mode = &quot;names+markers&quot;, color = ~avg_snow, size = ~avg_prcp, alpha = 0.5) 
+
+merged_ny %&gt;% filter(year == &quot;2000&quot;) %&gt;% 
+  plot_ly( x = ~latitude, y = ~longitude, type = &quot;choropleth&quot;, mode = &quot;markers&quot;, color = ~avg_prcp, locationmode = &quot;USA-states&quot;  ) 
+
+merged_ny %&gt;% filter(year== &quot;1985&quot; | year ==&quot;1990&quot; | year ==&quot;1995&quot; | year == &quot;2000&quot; | year == &quot;2005&quot; ) %&gt;% ggplot(aes(x = year, y = avg_prcp, color = id)) + geom_line()
+
+plot1 &lt;- merged_ny %&gt;% filter(year == &quot;2000&quot;) %&gt;%  ggplot(aes(y = latitude, x = longitude)) + geom_point(alpha = 0.5, aes(size = avg_snow, color = avg_snow ))
+
+plot_ly(plot1)                       
+merged_ny %&gt;% filter(year== &quot;1985&quot; | year ==&quot;1990&quot; | year ==&quot;1995&quot; | year == &quot;2000&quot; | year == &quot;2005&quot; )</code></pre>
+<pre class="r"><code>data(&quot;ny_noaa&quot;)
+stations &lt;- ghcnd_stations()
+nystationids &lt;-  stations %&gt;% 
+  filter(state == &quot;NY&quot;)
+nystationids &lt;- nystationids %&gt;% 
+                        filter(element == &quot;PRCP&quot; | element == &quot;SNOW&quot; | element == &quot;SNWD&quot;) %&gt;% 
+                        select(id, latitude, longitude, elevation, name, first_year, last_year)
+
+ny_noaa1 &lt;- ny_noaa %&gt;% na.omit() %&gt;% separate(date, into = c(&quot;year&quot;, &quot;month&quot;, &quot;day&quot;))
+
+ny1 &lt;- ny_noaa1 %&gt;% group_by(year, id) %&gt;% summarise(avg_prcp = mean(prcp, na.rm = T), 
+                                          avg_snow = mean(snow, na.rm = T), 
+                                          avg_snwd = mean(snwd, na.rm = T))
+
+merged_ny &lt;- ny1 %&gt;% left_join(nystationids)
+
+merged_ny %&gt;% filter(year == &quot;1995&quot; | year == &quot;1996&quot; |year == &quot;1997&quot; | year == &quot;1998&quot; | year == &quot;1999&quot;| year == &quot;2000&quot;) %&gt;% 
+  filter(id == &quot;USW00014733&quot; | id == &quot;US1NYCM0006&quot; | id == &quot;USW00014735&quot; | id == &quot;USC00306659&quot; | id == &quot;USW00004725&quot; | id == &quot;USW00094745&quot; | id == &quot;USW00014732&quot; | id ==&quot;USC00300889&quot; | id == &quot;USW00094725&quot; | id == &quot;USC00303284 &quot; | id == &quot;USW00094790&quot; | id ==&quot;USC00304555&quot; | id == &quot;USW00094728&quot;)  %&gt;% 
+  mutate(name = as.factor(name), 
+         name = fct_reorder(name, avg_prcp)) %&gt;% 
+  ungroup() %&gt;% 
+  plot_ly(x = ~year, y = ~avg_prcp, color = ~name, type = &quot;scatter&quot;,mode = &quot;lines+markers&quot;, colors = &quot;viridis&quot;) %&gt;% 
+  layout(xaxis = list(title = &#39;Year&#39;), 
+         yaxis = list(title = &#39;Average Precipitation (mm)&#39;), 
+         legend = list(title=list(text=&#39;&lt;b&gt;Station Name &lt;/b&gt;&#39;)), 
+         title= list(text = &quot;Average Precipitation in 1997-1999 in Select NY Stations&quot;)) </code></pre>
+<div id="htmlwidget-9e7f59cbf6c4a20b626d" style="width:90%;height:470.4px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-9e7f59cbf6c4a20b626d">{"x":{"visdat":{"e6ec18b13ac8":["function () ","plotlyVisDat"]},"cur_data":"e6ec18b13ac8","attrs":{"e6ec18b13ac8":{"x":{},"y":{},"mode":"lines+markers","color":{},"colors":"viridis","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"domain":[0,1],"automargin":true,"title":"Year","type":"category","categoryorder":"array","categoryarray":["1995","1996","1997","1998","1999","2000"]},"yaxis":{"domain":[0,1],"automargin":true,"title":"Average Precipitation (mm)"},"legend":{"title":{"text":"<b>Station Name <\/b>"}},"title":{"text":"Average Precipitation in 1997-1999 in Select NY Stations"},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":["1995","1995","1995"],"y":[14.2,14.2,14.2],"mode":"lines+markers","type":"scatter","name":"PLATTSBURGH AFB","marker":{"color":"rgba(68,1,84,1)","line":{"color":"rgba(68,1,84,1)"}},"textfont":{"color":"rgba(68,1,84,1)"},"error_y":{"color":"rgba(68,1,84,1)"},"error_x":{"color":"rgba(68,1,84,1)"},"line":{"color":"rgba(68,1,84,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["1995","1995","1995","1996","1996","1996","1997","1997","1997","1998","1998","1998","1999","1999","1999","2000","2000","2000"],"y":[23.1878453038674,23.1878453038674,23.1878453038674,34.4664804469274,34.4664804469274,34.4664804469274,21.9315068493151,21.9315068493151,21.9315068493151,27.3397260273973,27.3397260273973,27.3397260273973,22.7178082191781,22.7178082191781,22.7178082191781,31.0355191256831,31.0355191256831,31.0355191256831],"mode":"lines+markers","type":"scatter","name":"BINGHAMTON","marker":{"color":"rgba(72,37,117,1)","line":{"color":"rgba(72,37,117,1)"}},"textfont":{"color":"rgba(72,37,117,1)"},"error_y":{"color":"rgba(72,37,117,1)"},"error_x":{"color":"rgba(72,37,117,1)"},"line":{"color":"rgba(72,37,117,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["1995","1995","1995","1996","1996","1996","1997","1997","1997","1998","1998","1998","1999","1999","1999","2000","2000","2000"],"y":[23.6986301369863,23.6986301369863,23.6986301369863,32.1408450704225,32.1408450704225,32.1408450704225,28.6246575342466,28.6246575342466,28.6246575342466,24.1643835616438,24.1643835616438,24.1643835616438,23.7397260273973,23.7397260273973,23.7397260273973,29.327868852459,29.327868852459,29.327868852459],"mode":"lines+markers","type":"scatter","name":"BUFFALO","marker":{"color":"rgba(65,68,135,1)","line":{"color":"rgba(65,68,135,1)"}},"textfont":{"color":"rgba(65,68,135,1)"},"error_y":{"color":"rgba(65,68,135,1)"},"error_x":{"color":"rgba(65,68,135,1)"},"line":{"color":"rgba(65,68,135,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["1995","1995","1995","1996","1996","1996","1997","1997","1997","1998","1998","1998","1999","1999","1999","2000","2000","2000"],"y":[23.7260273972603,23.7260273972603,23.7260273972603,27.7423580786026,27.7423580786026,27.7423580786026,24.1917808219178,24.1917808219178,24.1917808219178,27.1287671232877,27.1287671232877,27.1287671232877,26.9178082191781,26.9178082191781,26.9178082191781,32.5956284153005,32.5956284153005,32.5956284153005],"mode":"lines+markers","type":"scatter","name":"ALBANY AP","marker":{"color":"rgba(53,96,141,1)","line":{"color":"rgba(53,96,141,1)"}},"textfont":{"color":"rgba(53,96,141,1)"},"error_y":{"color":"rgba(53,96,141,1)"},"error_x":{"color":"rgba(53,96,141,1)"},"line":{"color":"rgba(53,96,141,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["1995","1995","1995","1996","1996","1996","1997","1997","1997","1998","1998","1998","1999","1999","1999","2000","2000","2000"],"y":[24.2027397260274,24.2027397260274,24.2027397260274,25.8032786885246,25.8032786885246,25.8032786885246,25.6383561643836,25.6383561643836,25.6383561643836,25.7616438356164,25.7616438356164,25.7616438356164,28.8904109589041,28.8904109589041,28.8904109589041,30.2896174863388,30.2896174863388,30.2896174863388],"mode":"lines+markers","type":"scatter","name":"WATERTOWN INTL AP","marker":{"color":"rgba(42,120,142,1)","line":{"color":"rgba(42,120,142,1)"}},"textfont":{"color":"rgba(42,120,142,1)"},"error_y":{"color":"rgba(42,120,142,1)"},"error_x":{"color":"rgba(42,120,142,1)"},"line":{"color":"rgba(42,120,142,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["1995","1995","1995","1996","1996","1996","1997","1997","1997","1998","1998","1998","1999","1999","1999","2000","2000","2000"],"y":[24.3047091412742,24.3047091412742,24.3047091412742,31.732044198895,31.732044198895,31.732044198895,26.7197802197802,26.7197802197802,26.7197802197802,34.9123287671233,34.9123287671233,34.9123287671233,26.5178082191781,26.5178082191781,26.5178082191781,31.707650273224,31.707650273224,31.707650273224],"mode":"lines+markers","type":"scatter","name":"LAKE PLACID 2 S","marker":{"color":"rgba(33,144,141,1)","line":{"color":"rgba(33,144,141,1)"}},"textfont":{"color":"rgba(33,144,141,1)"},"error_y":{"color":"rgba(33,144,141,1)"},"error_x":{"color":"rgba(33,144,141,1)"},"line":{"color":"rgba(33,144,141,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["1995","1995","1995","1996","1996","1996","1997","1997","1997","1998","1998","1998","1999","1999","1999","2000","2000","2000"],"y":[24.5780821917808,24.5780821917808,24.5780821917808,34.1065573770492,34.1065573770492,34.1065573770492,31.5972602739726,31.5972602739726,31.5972602739726,31.4767123287671,31.4767123287671,31.4767123287671,28.6,28.6,28.6,29.5054644808743,29.5054644808743,29.5054644808743],"mode":"lines+markers","type":"scatter","name":"NEW YORK LAGUARDIA AP","marker":{"color":"rgba(34,168,132,1)","line":{"color":"rgba(34,168,132,1)"}},"textfont":{"color":"rgba(34,168,132,1)"},"error_y":{"color":"rgba(34,168,132,1)"},"error_x":{"color":"rgba(34,168,132,1)"},"line":{"color":"rgba(34,168,132,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["1995","1995","1995","1996","1996","1996","1997","1997","1997","1998","1998","1998","1999","1999","1999","2000","2000","2000"],"y":[25.8082191780822,25.8082191780822,25.8082191780822,26.1912568306011,26.1912568306011,26.1912568306011,22.75,22.75,22.75,24.0164383561644,24.0164383561644,24.0164383561644,22.958904109589,22.958904109589,22.958904109589,31.3539094650206,31.3539094650206,31.3539094650206],"mode":"lines+markers","type":"scatter","name":"MASSENA INTL AP","marker":{"color":"rgba(67,190,113,1)","line":{"color":"rgba(67,190,113,1)"}},"textfont":{"color":"rgba(67,190,113,1)"},"error_y":{"color":"rgba(67,190,113,1)"},"error_x":{"color":"rgba(67,190,113,1)"},"line":{"color":"rgba(67,190,113,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["1995","1995","1995","1996","1996","1996","1997","1997","1997","1998","1998","1998","1999","1999","1999","2000","2000","2000"],"y":[28.2027397260274,28.2027397260274,28.2027397260274,47.3202247191011,47.3202247191011,47.3202247191011,32.6957746478873,32.6957746478873,32.6957746478873,39.7994011976048,39.7994011976048,39.7994011976048,30.5698630136986,30.5698630136986,30.5698630136986,30.1260273972603,30.1260273972603,30.1260273972603],"mode":"lines+markers","type":"scatter","name":"BRIDGEHAMPTON","marker":{"color":"rgba(122,209,81,1)","line":{"color":"rgba(122,209,81,1)"}},"textfont":{"color":"rgba(122,209,81,1)"},"error_y":{"color":"rgba(122,209,81,1)"},"error_x":{"color":"rgba(122,209,81,1)"},"line":{"color":"rgba(122,209,81,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["1995","1995","1995","1996","1996","1996","1997","1997","1997","1998","1998","1998","1999","1999","1999","2000","2000","2000"],"y":[28.8511235955056,28.8511235955056,28.8511235955056,39.3112244897959,39.3112244897959,39.3112244897959,29.4535519125683,29.4535519125683,29.4535519125683,30.8563535911602,30.8563535911602,30.8563535911602,23.4021739130435,23.4021739130435,23.4021739130435,32.5084745762712,32.5084745762712,32.5084745762712],"mode":"lines+markers","type":"scatter","name":"NEW YORK CNTRL PK TWR","marker":{"color":"rgba(188,223,39,1)","line":{"color":"rgba(188,223,39,1)"}},"textfont":{"color":"rgba(188,223,39,1)"},"error_y":{"color":"rgba(188,223,39,1)"},"error_x":{"color":"rgba(188,223,39,1)"},"line":{"color":"rgba(188,223,39,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["1995","1995","1995","1996","1996","1996","1997","1997","1997","1998","1998","1998","1999","1999","1999","2000","2000","2000"],"y":[30.3156028368794,30.3156028368794,30.3156028368794,47.063829787234,47.063829787234,47.063829787234,34.0632911392405,34.0632911392405,34.0632911392405,28.8172757475083,28.8172757475083,28.8172757475083,30.7277936962751,30.7277936962751,30.7277936962751,34.6741935483871,34.6741935483871,34.6741935483871],"mode":"lines+markers","type":"scatter","name":"WESTCHESTER CO AP","marker":{"color":"rgba(253,231,37,1)","line":{"color":"rgba(253,231,37,1)"}},"textfont":{"color":"rgba(253,231,37,1)"},"error_y":{"color":"rgba(253,231,37,1)"},"error_x":{"color":"rgba(253,231,37,1)"},"line":{"color":"rgba(253,231,37,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

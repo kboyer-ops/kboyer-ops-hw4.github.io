@@ -5,11 +5,8 @@ date: "11/5/2021"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
 
-```{r}
+```{r, include = FALSE}
 library(tidyverse)
 library(p8105.datasets)
 library(plotly)
@@ -38,81 +35,14 @@ scale_fill_discrete = scale_fill_viridis_d
 
 ```
 
-```{r, eval = FALSE}
-
-
-colnames(ny_noaa)
-
-Hmisc::describe(ny_noaa$id)
-(ny_noaa$id)
-
-ny_noaa %>% select(id) %>% distinct() %>% count()
-
-#select Buffalo, Syracuse, Rochester, Watertown, Lake Placid, Albany, Central Park, Montauck 
-range(ny_noaa$date)
-
-GHCND:USW00014733 buffalo 
-GHCND:US1NYCM0006 , GHCND:USW00014748, GHCND:USC00302610 elmira 
-GHCND:USC00306659 , GHCND:USW00094733 plattsburgh
-GHCND:USW00014735 albany 
-GHCND:USW00094794 utica/onieda 
-GHCND:USW00004725 binghamton
-GHCND:USW00094745 white plains
-GHCND:USW00014732 laguardia (queens)
-GHCND:USC00300889 bridgehampton
-GHCND:USW00094725 massena 
-GHCND:USC00303284 glen falls farm 
-GHCND:USC00304555 lake placid 
-GHCND:USW00094790 watertown
-GHCND:USC00309292 west point
-GHCND:USW00094728 central park 
-
-
-merged_ny %>% 
-  filter(id == "USW00014733" | id == "US1NYCM0006" | id == "USW00014735" | id == "USC00306659" | id == "USW00004725" | id == "USW00094745" | id == "USW00014732" | id =="USC00300889" | id == "USW00094725" | id == "USC00303284 " | id == "USW00094790" | id =="USC00304555" | id == "USW00094728") %>% 
-  ggplot(aes(x = year, y = avg_snwd, color = name)) + 
-  geom_line(aes(group= name))
- 
-
-merged_ny %>% mutate(name = as.factor(name), 
-                     name = fct_reorder(name, avg_prcp)) %>%
-  filter(id == "USW00014733" | id == "US1NYCM0006" | id == "USW00014735" | id == "USC00306659" | id == "USW00004725" | id == "USW00094745" | id == "USW00014732" | id =="USC00300889" | id == "USW00094725" | id == "USC00303284 " | id == "USW00094790" | id =="USC00304555" | id == "USW00094728") %>%  
-  ggplot(aes(x = name, y = avg_prcp)) + 
-  geom_col(aes(fill = elevation))
-
-
-
-
-
-plot_ly(
-    x = ~lat, y = ~long, type = "scatter", mode = "markers",
-    color = ~price, text = ~text_label, alpha = 0.5)
-
-merged_ny  %>% filter(year ==  "2000") %>% 
-  plot_ly( x = ~latitude, y = ~longitude, type = "scatter", mode = "names+markers", color = ~avg_snow, size = ~avg_prcp, alpha = 0.5) 
-
-merged_ny %>% filter(year == "2000") %>% 
-  plot_ly( x = ~latitude, y = ~longitude, type = "choropleth", mode = "markers", color = ~avg_prcp, locationmode = "USA-states"  ) 
-
-merged_ny %>% filter(year== "1985" | year =="1990" | year =="1995" | year == "2000" | year == "2005" ) %>% ggplot(aes(x = year, y = avg_prcp, color = id)) + geom_line()
-
-plot1 <- merged_ny %>% filter(year == "2000") %>%  ggplot(aes(y = latitude, x = longitude)) + geom_point(alpha = 0.5, aes(size = avg_snow, color = avg_snow ))
-
-plot_ly(plot1)                       
-merged_ny %>% filter(year== "1985" | year =="1990" | year =="1995" | year == "2000" | year == "2005" )
-```
-
-
-
-
-```{r}
+```{r, message = FALSE}
 data("ny_noaa")
 stations <- ghcnd_stations()
 nystationids <-  stations %>% 
   filter(state == "NY")
 nystationids <- nystationids %>% 
                         filter(element == "PRCP" | element == "SNOW" | element == "SNWD") %>% 
-                        select(id, latitude, longitude, elevation, name, first_year, last_year)
+                        select(id, latitude, longitude, elevation, name, first_year, last_year, element)
 
 ny_noaa1 <- ny_noaa %>% na.omit() %>% separate(date, into = c("year", "month", "day"))
 
@@ -127,11 +57,28 @@ merged_ny %>% filter(year == "1995" | year == "1996" |year == "1997" | year == "
   mutate(name = as.factor(name), 
          name = fct_reorder(name, avg_prcp)) %>% 
   ungroup() %>% 
-  plot_ly(x = ~year, y = ~avg_prcp, color = ~name, type = "scatter",mode = "lines+markers", colors = "viridis") %>% 
+  plot_ly(x = ~year, y = ~avg_prcp, color = ~name, type = "scatter", mode = "lines+markers", colors = "viridis") %>% 
   layout(xaxis = list(title = 'Year'), 
          yaxis = list(title = 'Average Precipitation (mm)'), 
          legend = list(title=list(text='<b>Station Name </b>')), 
          title= list(text = "Average Precipitation in 1997-1999 in Select NY Stations")) 
+
+
+
+merged_ny %>% filter(year == "1990" |year == "1991" |year == "1992" | year == "1993" |year == "1994" |year == "1995" | year == "1996" |year == "1997" | year == "1998" | year == "1999") %>% 
+  filter(id == "USW00014733" | id == "US1NYCM0006" | id == "USW00014735" | id == "USC00306659" | id == "USW00004725" | id == "USW00094745" | id == "USW00014732" | id =="USC00300889" | id == "USW00094725" | id == "USC00303284 " | id == "USW00094790" | id =="USC00304555" | id == "USW00094728") %>% 
+  mutate(name = fct_reorder(name, avg_snow)) %>% 
+  plot_ly(y = ~avg_snow, color = ~name, type = "box", colors = "viridis") %>% 
+  layout(xaxis = list(title = ' '), 
+         yaxis = list(title = 'Average Snowfall (mm)'), 
+         legend = list(title=list(text='<b>Station Name </b>')), 
+         title= list(text = "Average Snowfall from 1990-1999 at Select NY Stations")) 
+
+
+merged_ny %>% filter(year == "2000") %>% mutate(text_label = str_c("Depth (mm): ", avg_snwd, "\nName: ", name))  %>% 
+  plot_ly(x = ~longitude, y = ~latitude, color = ~avg_snwd, type ="scatter", mode = "markers",  text = ~text_label, alpha = 0.5, colors = "viridis", size = ~avg_snwd)  %>%  layout(xaxis = list(title = 'Longitude '), 
+         yaxis = list(title = 'Latitude'),
+         title= list(text = "Average Snow Depth in 2000 at NY NOAA Stations"))
 
 ```
 
