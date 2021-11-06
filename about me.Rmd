@@ -1,0 +1,23 @@
+---
+title: "About me"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+Here is some information about my past experiences 
+
+## School 
+* Columbia University Mailman School of Public Health, 2020 - 2022 (expected)         
+Masters of Public Health 
+Environmental Health Sciences, Molecular Epidemiology certificate 
+
+* Fordham University, 2016 - 2020 
+Bachelors of Science
+Biology major, Chemistry minor 
+
+back [home](index.html)
+
+
+
